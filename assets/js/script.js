@@ -23,14 +23,15 @@ var questions = [
 var buttonEl = document.querySelector("#start-btn");
 var quizIntor = document.querySelector("#quiz-intro");
 var mainEl = document.querySelector("#main");
-
-
+var questionsAnswered = 0;
+var timer = document.querySelector(".time");
 
 buttonEl.addEventListener("click", startQuiz);
 
 function startQuiz() {
     quizIntor.remove();
     displayQuestion();
+    countdown();
 }
 
 function displayQuestion() {
@@ -55,12 +56,27 @@ function displayQuestion() {
     question.appendChild(optionButton3);
     optionButton3.className= "option-btn";
 
+    questionsAnswered++;
+
+    //question.addEventListener("click", checkAnswer)
+
 }
 }
 
+function countdown() {
+    var timeLeft = 60;
+
+    var timeInterval = setInterval(function() {
+        if (timeLeft > 1) {
+            timer.textContent = "Remaining Time: " + timeLeft;
+            timeLeft--;
+        }
+    }, 1000);
+}
 
 
 /*
+
 4 How do you create a function in JavaScript?
 function:myFunction()
 A function myFunction()
