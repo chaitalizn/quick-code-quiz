@@ -1,25 +1,45 @@
 :root {
  --color1: #01050A;
- --color2: #DFA622;
- --color3: #BFC3CA;
- --color4: #4D5F75;
+ --color2: #ffc640;
+ --color3: #b8c9c0;
+ --color4: #047948;
  --color5: #ffffff;
+ font-size: 62.5%;
 }
 
 * {
+    box-sizing: border-box;
 	margin: 0;
 	padding: 0;
 }
 
+
+
 body {
+    font-family: Arial, Helvetica, sans-serif;
     width: 100%;
     background-color: var(--color3);
+    color: var(--color5);
 }
 
 .header-flex {
     display: flex;
     justify-content: space-between;
     margin: 2rem 4rem;
+}
+
+
+.header-flex-item-1, a {
+    text-decoration: none;
+    color: var(--color1);
+}
+
+.header-flex-item-1, .header-flex-item-2 {
+    font-size: 2rem;
+    border: 1px solid var(--color1);
+    background-color: var(--color5);
+    color: var(--color1);
+    padding: 1rem;
 }
 
 .main-flex {
@@ -38,29 +58,27 @@ body {
     margin: 1rem 2rem;
 }
 
+
 h1 {
-    font-size: 3.5rem;
+    font-size: 6rem;
     padding-bottom: .5rem;
-    color: #fff;
 }
 
 h2 {
-    font-size: 2rem;
-    color: #fff;
+    font-size: 3.5rem;
     font-weight: lighter;
 }
-p {
-    font-size: 1.5rem;
-    line-height: 2.5rem;
-    color: var(--color1);
+.main-flex-item-2 p {
+    font-size: 2rem;
+    line-height: 3rem;
+    font-weight: lighter;
 }
 
 .start-btn {
     padding: .5rem 2.5rem;
-    font-size: 1.20rem;
+    font-size: 1.75rem;
     font-weight: bold;
     background-color: var(--color2);
-    border: 0;
-    border-radius: 1.5rem;
+    border: 1px solid var(--color5);
 
 }
