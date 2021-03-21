@@ -12,7 +12,7 @@
     <header>
         <div class="header-flex">
             <div class="header-flex-item-1">
-                <p><a href="">HIGH SCORES</a></p>
+                <p id="high-score">HIGH SCORES</p>
             </div>
 
             <div class="header-flex-item-2">
@@ -33,9 +33,27 @@
                 <p>Try answer following JavaScript questions in give time. Keep in mind if your answer is incorrect 10s will be deducted from your remaining time.</p>
             </div>
             <div class="main-flex-item-3">
-                <button type="button" class="start-btn" id="start-btn">START</button>
+                <button type="button" class="btn" id="start-btn">START</button>
             </div>
             
+        </div>
+        
+        <div class="end-container">
+            <div id="end" class="end-flex">
+                <h1 id="finalScoreBoard">Score Board</h1>
+                <form>
+                    <input 
+                    type="text"
+                    name="username"
+                    id="username"
+                    placeholder="username" />
+    
+                    <button type="submit" class="btn" id="saveScoreBtn" disable onclick= "saveHighScore(event)"> SAVE</button>
+                </form>
+                <div>
+                <a class="btn" href="index.html">RETAKE QUIZ</a>
+                </div>
+            </div>
         </div>
     </main>
 

@@ -4,104 +4,152 @@ var questions = [
     option1: "<script>",
     option2: "<scripting>",
     option3: "<javascript>",
-    answer: "<script>"
+    answer: "A"
 },
     {question: "What is the correct JavaScript syntax to change the content of this <p id='demo'>This is a demonstration.</p> HTML element?",
     option1: "document.getElementName('p').innerHTML = 'Hello World!'",
     option2: "document.getElement('p').innerHTML = 'Hello World!'",
     option3: "document.getElementById('demo').innerHTML = 'Hello World!'",
-    answer: "document.getElementById('demo').innerHTML = 'Hello World!'"
+    answer: "C"
 },
     {question: "Where is the correct place to insert a JavaScript?",
     option1: "The <body> section",
     option2: "Both the <head> section and the <body> section are correct",
     option3: "The <head> section",
-    answer: "Both the <head> section and the <body> section are correct"
+    answer: "B"
 }
 ]
 
 var buttonEl = document.querySelector("#start-btn");
-var quizIntor = document.querySelector("#quiz-intro");
+var quizIntro = document.querySelector("#quiz-intro");
 var mainEl = document.querySelector("#main");
 var questionsAnswered = 0;
-var timer = document.querySelector(".time");
+var timerEl = document.querySelector(".time");
+var score = 0;
+var timeLeft = 60;
+var displayScoreEl = document.querySelector("#high-score");
+var questionEl = document.querySelector("#present-q");
+var finalScoreBoardEl = document.querySelector(".end-container");
+var questionNumber = 0
 
 buttonEl.addEventListener("click", startQuiz);
 
 function startQuiz() {
-    quizIntor.remove();
-    displayQuestion();
+    //quizIntro.remove();
     countdown();
+    if (!timeLeft > 0 || !questions.length === questionNumber) { 
+    displayQuestion();
+    }
 }
 
 function displayQuestion() {
-    for (i = 0; i < questions.length; i++) {
-    var question = document.createElement("h2");
-    question.textContent = questions[i].question;
-    mainEl.appendChild(question);
-    question.className = "main-flex";
 
+    quizIntro.innerHTML = "";
+    quizIntro.innerHTML = "<h2>" + questions[questionNumber].question + "</h2>";
+    //quizIntro.appendChild(question);
+   // question.className = "main-flex";
+   
     var optionButton1 = document.createElement("button");
-    optionButton1.textContent = questions[i].option1;
-    question.appendChild(optionButton1);
+    optionButton1.value = "A";
+    optionButton1.textContent = questions[questionNumber].option1;
+    quizIntro.appendChild(optionButton1);
     optionButton1.className= "option-btn";
 
     var optionButton2 = document.createElement("button");
-    optionButton2.textContent = questions[i].option2;
-    question.appendChild(optionButton2);
+    optionButton2.value = "B";
+    optionButton2.textContent = questions[questionNumber].option2;
+    quizIntro.appendChild(optionButton2);
     optionButton2.className= "option-btn";
 
     var optionButton3 = document.createElement("button");
-    optionButton3.textContent = questions[i].option3;
-    question.appendChild(optionButton3);
+    optionButton3.value = "c";
+    optionButton3.textContent = questions[questionNumber].option3;
+    quizIntro.appendChild(optionButton3);
     optionButton3.className= "option-btn";
 
     questionsAnswered++;
 
-    //question.addEventListener("click", checkAnswer)
+    mainEl.addEventListener("click", optionButtonHandler);
+    
+}
 
+var optionButtonHandler = function(event) {
+    var targetEl = event.target;
+
+    if (targetEl.matches(".option-btn")) {
+        answer = event.target.value;
+        checkAnswer();
+        questionNumber++;
+        console.log(questionNumber);
+
+        displayQuestion();
+    
+    }
+}; 
+
+function checkAnswer() {
+    if (answer === questions[questionNumber].answer) {
+        score += 10;
+        localStorage.setItem("score", score);
+        console.log(score);
+        var result = document.createElement("h2");
+        result.textContent = "Correct!";
+        mainEl.appendChild(result);
+   
+    } else {
+        timeLeft -= 10;
+        var result = document.createElement("h2");
+        result.textContent = "Wrong! You lost 10s from remaining time.";
+        mainEl.appendChild(result);
+        
+    }
 }
-}
+
+
 
 function countdown() {
-    var timeLeft = 60;
 
     var timeInterval = setInterval(function() {
         if (timeLeft > 1) {
-            timer.textContent = "Remaining Time: " + timeLeft;
+            timerEl.textContent = "Remaining Time: " + timeLeft;
             timeLeft--;
         }
     }, 1000);
 }
 
 
+displayScoreEl.addEventListener("click", function() {
+      quizIntro.remove();  
+      finalScoreBoardEl.style.display = "block"; 
+    })
+
 /*
 
 4 How do you create a function in JavaScript?
 function:myFunction()
-A function myFunction()
+B function myFunction()
 function = myFunction()
 
 5 How to write an IF statement in JavaScript?
 if i == 5 then
 if i = 5
-A if (i == 5)
+C if (i == 5)
 
 6 How to write an IF statement for executing some code if "i" is NOT equal to 5?
 
 if i =! 5 then
 if (i <> 5)
-A if (i != 5)
+C if (i != 5)
 
 7 How does a WHILE loop start?
 while i = 1 to 10
-A while (i <= 10)
+B while (i <= 10)
 while (i <= 10; i++)
 
 8 How does a FOR loop start?
 for (i <= 5; i++)
 for (i = 0; i <=5)
-A for (i=0; i <= 5; i ++)
+C for (i=0; i <= 5; i ++)
 
 9 What is the correct way to write a JavaScript array?
 A var color = ["red", "green", "blue"]
