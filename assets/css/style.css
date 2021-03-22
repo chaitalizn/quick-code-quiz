@@ -1,112 +1,122 @@
 :root {
- --color1: #01050A;
- --color2: #ffc640;
- --color3: #e1ebe5;
- --color4: #019c95;
- --color5: #ffffff;
- font-size: 62.5%;
-}
+    --color1: #01050A;
+    --color2: #ffc640;
+    --color3: #e1ebe5;
+    --color4: #019c95;
+    --color5: #ffffff;
+    font-size: 62.5%;
+   }
+   
+   * {
+      box-sizing: border-box;
+       margin: 0;
+       padding: 0;
+   }
+   
+   
+   
+   body {
+       font-family: Arial, Helvetica, sans-serif;
+       width: 100%;
+       background-color: var(--color3);
+       color: var(--color5);
+   }
+   
+   .header-flex {
+       display: flex;
+       justify-content: space-between;
+       margin: 2rem 4rem;
+   }
+   
+   
+   .header-flex-item-1, a {
+       text-decoration: none;
+       color: var(--color1);
+   }
+   
+   .header-flex-item-1, .header-flex-item-2 {
+       font-size: 2rem;
+       border: 1px solid var(--color1);
+       background-color: var(--color5);
+       color: var(--color1);
+       padding: 1rem;
+   }
+   
+   .main-flex, .question-flex {
+       background-color: var(--color4);
+       border-radius: 2rem;
+       margin: 6rem auto 0 auto;
+       padding: 4rem;
+       width: 40%;
+       display: flex;
+       flex-direction: column;
+       align-content: center;
+       
+   }
+   .result-style {
+       margin: 2rem 0;
+       text-align: center;
+       color: var(--color1);
+   
+   }
+   
+   .main-flex-item-1, .main-flex-item-2, .main-flex-item-3 {
+       margin: 1rem 2rem;
+   }
+   
+   
+   h1 {
+       font-size: 6rem;
+       padding-bottom: .5rem;
+   }
+   
+   h2, .question-style {
+       font-size: 3.5rem;
+       font-weight: lighter;
+   }
+   .main-flex-item-2 p {
+       font-size: 2rem;
+       line-height: 3rem;
+       font-weight: lighter;
+   }
+   
+   .btn {
+       padding: 2rem 4rem;
+       font-size: 2.5rem;
+       font-weight: bold;
+       background-color: var(--color2);
+       border: 1px solid var(--color5);
+   
+   }
+   
+   .option-btn {
+       font-size: 2rem;
+       padding: 1rem;
+       margin: 2rem 0;
+       background-color: var(--color2);
+       border: 1px solid var(--color5);
+       text-align: left;
+   }
+   
+   /*Form*/
+   
+   #end, form {
+       width: 100%;
+       display: flex;
+       flex-direction: column;
+       align-items: center;
+   }
+   
+   input {
+       margin-bottom: 1rem;
+       padding: 1.5rem;
+       font-size: 1.8rem;
+   }
+   
+   .end-container {
+       display: none;
+   }
 
-* {
-   box-sizing: border-box;
-	margin: 0;
-	padding: 0;
-}
-
-
-
-body {
-    font-family: Arial, Helvetica, sans-serif;
-    width: 100%;
-    background-color: var(--color3);
-    color: var(--color5);
-}
-
-.header-flex {
-    display: flex;
-    justify-content: space-between;
-    margin: 2rem 4rem;
-}
-
-
-.header-flex-item-1, a {
-    text-decoration: none;
-    color: var(--color1);
-}
-
-.header-flex-item-1, .header-flex-item-2 {
-    font-size: 2rem;
-    border: 1px solid var(--color1);
-    background-color: var(--color5);
-    color: var(--color1);
-    padding: 1rem;
-}
-
-.main-flex, .question-flex {
-    background-color: var(--color4);
-    border-radius: 2rem;
-    margin: 6rem auto 0 auto;
-    padding: 4rem;
-    width: 40%;
-    display: flex;
-    flex-direction: column;
-    align-content: center;
-    
-}
-
-.main-flex-item-1, .main-flex-item-2, .main-flex-item-3 {
-    margin: 1rem 2rem;
-}
-
-
-h1 {
-    font-size: 6rem;
-    padding-bottom: .5rem;
-}
-
-h2, .question-style {
-    font-size: 3.5rem;
-    font-weight: lighter;
-}
-.main-flex-item-2 p {
-    font-size: 2rem;
-    line-height: 3rem;
-    font-weight: lighter;
-}
-
-.btn {
-    padding: .5rem 2.5rem;
-    font-size: 1.75rem;
-    font-weight: bold;
-    background-color: var(--color2);
-    border: 1px solid var(--color5);
-
-}
-
-.option-btn {
-    font-size: 2rem;
-    padding: 1rem;
-    margin: 2rem 0;
-    background-color: var(--color2);
-    border: 1px solid var(--color5);
-    text-align: left;
-}
-
-/*Form*/
-
-#end, form {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-input {
-    margin-bottom: 1rem;
-    padding: 1.5rem;
-    font-size: 1.8rem;
-}
-
-.end-container {
-    display: none;
-}
+   #scoreTitle {
+       color: var(--color4);
+   }

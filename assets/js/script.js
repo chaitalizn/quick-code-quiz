@@ -1,4 +1,5 @@
 
+
 var questions = [
     {question: "Inside which HTML element do we put the JavaScript?",
     option1: "<script>",
@@ -6,40 +7,61 @@ var questions = [
     option3: "<javascript>",
     answer: "A"
 },
-    {question: "What is the correct JavaScript syntax to change the content of this <p id='demo'>This is a demonstration.</p> HTML element?",
-    option1: "document.getElementName('p').innerHTML = 'Hello World!'",
-    option2: "document.getElement('p').innerHTML = 'Hello World!'",
-    option3: "document.getElementById('demo').innerHTML = 'Hello World!'",
+    {question: "How to write an IF statement in JavaScript?",
+    option1: "if i =! 5 then",
+    option2: "if (i <> 5)",
+    option3: "if (i != 5)'",
     answer: "C"
 },
     {question: "Where is the correct place to insert a JavaScript?",
     option1: "The <body> section",
-    option2: "Both the <head> section and the <body> section are correct",
+    option2: "Both the <head> & the <body> section are correct",
     option3: "The <head> section",
     answer: "B"
+},
+    {question: "How does a WHILE loop start?",
+    option1: "while i = 1 to 10",
+    option2: "while (i <= 10)",
+    option3: "while (i <= 10; i++",
+    answer: "B"
+},
+    {question: "How does a FOR loop start?",
+    option1: "for (i <= 5; i++)",
+    option2: "for (i = 0; i <=5)",
+    option3: "for (i=0; i <= 5; i ++)",
+    answer: "C"
+},
+    {question: "How do you round the number 7.25, to the nearest integer?",
+    option1: "Math.round(7.25)",
+    option2: "Math.rnd(7.25)",
+    option3: "round(7.25)",
+    answer: "A"
 }
 ]
 
 var buttonEl = document.querySelector("#start-btn");
 var quizIntro = document.querySelector("#quiz-intro");
 var mainEl = document.querySelector("#main");
-var questionsAnswered = 0;
+//var questionsAnswered = 0;
 var timerEl = document.querySelector(".time");
 var score = 0;
-var timeLeft = 60;
+var timeLeft = 30;
 var displayScoreEl = document.querySelector("#high-score");
 var questionEl = document.querySelector("#present-q");
 var finalScoreBoardEl = document.querySelector(".end-container");
-var questionNumber = 0
-
+var questionNumber = 0;
+var saveButton = document.getElementById("saveScoreBtn");
+var savedScore = localStorage.getItem("score");
+var username = document.querySelector("#username");
+var formContainer = document.querySelector("#form-container");
 buttonEl.addEventListener("click", startQuiz);
 
 function startQuiz() {
     //quizIntro.remove();
     countdown();
-    if (!timeLeft > 0 || !questions.length === questionNumber) { 
+    
     displayQuestion();
-    }
+    
 }
 
 function displayQuestion() {
@@ -47,8 +69,8 @@ function displayQuestion() {
     quizIntro.innerHTML = "";
     quizIntro.innerHTML = "<h2>" + questions[questionNumber].question + "</h2>";
     //quizIntro.appendChild(question);
-   // question.className = "main-flex";
-   
+// question.className = "main-flex";
+
     var optionButton1 = document.createElement("button");
     optionButton1.value = "A";
     optionButton1.textContent = questions[questionNumber].option1;
@@ -67,10 +89,9 @@ function displayQuestion() {
     quizIntro.appendChild(optionButton3);
     optionButton3.className= "option-btn";
 
-    questionsAnswered++;
+    //questionsAnswered++;
 
-    mainEl.addEventListener("click", optionButtonHandler);
-    
+    quizIntro.addEventListener("click", optionButtonHandler);
 }
 
 var optionButtonHandler = function(event) {
@@ -82,8 +103,14 @@ var optionButtonHandler = function(event) {
         questionNumber++;
         console.log(questionNumber);
 
-        displayQuestion();
-    
+        //next question
+        if(questionNumber >= questions.length){
+            quizIntro.remove();
+            finalScoreBoardEl.style.display = "block"; 
+        }
+        else{
+            displayQuestion();
+        }
     }
 }; 
 
@@ -91,74 +118,71 @@ function checkAnswer() {
     if (answer === questions[questionNumber].answer) {
         score += 10;
         localStorage.setItem("score", score);
-        console.log(score);
-        var result = document.createElement("h2");
-        result.textContent = "Correct!";
-        mainEl.appendChild(result);
+        //var result = document.createElement("h2");
+        //result.textContent = "Correct!";
+        //mainEl.appendChild(result);
+        //result.className = "result-style";
    
     } else {
         timeLeft -= 10;
-        var result = document.createElement("h2");
-        result.textContent = "Wrong! You lost 10s from remaining time.";
-        mainEl.appendChild(result);
+        //var result = document.createElement("h2");
+        //result.textContent = "Wrong! You lost 10s from remaining time.";
+        //mainEl.appendChild(result);
+        //result.className = "result-style";
         
     }
-}
+};
 
 
 
 function countdown() {
 
     var timeInterval = setInterval(function() {
-        if (timeLeft > 1) {
-            timerEl.textContent = "Remaining Time: " + timeLeft;
+        if (timeLeft > 0) {
             timeLeft--;
+            timerEl.textContent = "Remaining Time: " + timeLeft;
+        }
+        else {
+            quizIntro.remove();
+            finalScoreBoardEl.style.display = "block"; 
         }
     }, 1000);
+};
+
+
+displayScoreEl.addEventListener("click", highScore);
+
+function highScore() {
+    formContainer.innerHTML = "";
+    var scoreOne = document.createElement("h2");
+    scoreOne.textContent = "Your Score " + savedScore;
+    formContainer.appendChild(scoreOne);
+    scoreOne.className = "result-style";
+
+    var startAgain = document.createElement("button");
+    startAgain.textContent = "Retake Quiz";
+    startAgain.className = "btn";
+    formContainer.appendChild(startAgain);
+    
+
+    startAgain.addEventListener("click", function(){
+        window.location.reload();
+    });
 }
 
 
-displayScoreEl.addEventListener("click", function() {
-      quizIntro.remove();  
-      finalScoreBoardEl.style.display = "block"; 
-    })
+    
+saveScoreBtn.addEventListener("click", saveScore);
 
-/*
-
-4 How do you create a function in JavaScript?
-function:myFunction()
-B function myFunction()
-function = myFunction()
-
-5 How to write an IF statement in JavaScript?
-if i == 5 then
-if i = 5
-C if (i == 5)
-
-6 How to write an IF statement for executing some code if "i" is NOT equal to 5?
-
-if i =! 5 then
-if (i <> 5)
-C if (i != 5)
-
-7 How does a WHILE loop start?
-while i = 1 to 10
-B while (i <= 10)
-while (i <= 10; i++)
-
-8 How does a FOR loop start?
-for (i <= 5; i++)
-for (i = 0; i <=5)
-C for (i=0; i <= 5; i ++)
-
-9 What is the correct way to write a JavaScript array?
-A var color = ["red", "green", "blue"]
-var color = 1 = ("red"), 2 = ("green"), 3 = ("blue")
-var color = (1:"red", 2:"green", 3:"blue")
-
-10 How do you round the number 7.25, to the nearest integer?
-A Math.round(7.25)
-Math.rnd(7.25)
-round(7.25)
-
-*/
+function saveScore(){
+    if (username.value) {
+    var yourScore = document.createElement("h2");
+    yourScore.textContent = username.value + " scored " + score;
+    formContainer.appendChild(yourScore);
+    yourScore.className = "result-style";
+    
+    localStorage.setItem("Name", username.value);
+    } else {
+        alert("Please enter your name!");
+    }
+}
