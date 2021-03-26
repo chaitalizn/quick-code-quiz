@@ -10,7 +10,7 @@ var questions = [
     {question: "How to write an IF statement in JavaScript?",
     option1: "if i =! 5 then",
     option2: "if (i <> 5)",
-    option3: "if (i != 5)'",
+    option3: "if (i != 5)",
     answer: "C"
 },
     {question: "Where is the correct place to insert a JavaScript?",
@@ -22,7 +22,7 @@ var questions = [
     {question: "How does a WHILE loop start?",
     option1: "while i = 1 to 10",
     option2: "while (i <= 10)",
-    option3: "while (i <= 10; i++",
+    option3: "while (i <= 10) i++",
     answer: "B"
 },
     {question: "How does a FOR loop start?",
@@ -39,25 +39,41 @@ var questions = [
 }
 ]
 
-var buttonEl = document.querySelector("#start-btn");
-var quizIntro = document.querySelector("#quiz-intro");
-var mainEl = document.querySelector("#main");
-//var questionsAnswered = 0;
-var timerEl = document.querySelector(".time");
-var score = 0;
-var timeLeft = 30;
-var displayScoreEl = document.querySelector("#high-score");
-var questionEl = document.querySelector("#present-q");
-var finalScoreBoardEl = document.querySelector(".end-container");
+var strButtonEl = document.querySelector("#start-btn");
+var mainContainerEl = document.querySelector("#main-container")
+var timerEl = document.querySelector("#time");
+var timeLeft = 60;
 var questionNumber = 0;
-var saveButton = document.getElementById("saveScoreBtn");
-var savedScore = localStorage.getItem("score");
-var username = document.querySelector("#username");
-var formContainer = document.querySelector("#form-container");
-buttonEl.addEventListener("click", startQuiz);
+var endContainerEl = document.querySelector(".end-container");
+var saveScoreBtn = document.getElementById("saveScoreBtn");
+var userName = document.querySelector("#username");
+var userScore = 0;
+var displayScoreEl = document.querySelector("#high-score");
+var answer;
+var storeScore;
+var allScores = [];
+
+//timer function
+
+
+function countdown() {
+
+    setInterval(function() {
+        if (timeLeft > 0) {
+            timeLeft--;
+            timerEl.textContent = "Remaining Time: " + timeLeft;
+        }
+        else {
+            mainContainerEl.remove();
+            endContainerEl.style.display = "block"; 
+        }
+    }, 1000);
+}
+
+strButtonEl.addEventListener("click", startQuiz);
 
 function startQuiz() {
-    //quizIntro.remove();
+    
     countdown();
     
     displayQuestion();
@@ -65,33 +81,31 @@ function startQuiz() {
 }
 
 function displayQuestion() {
+	
+	var quizIntro = document.querySelector(".quiz-intro");
+	quizIntro.style.display = "none";
+	strButtonEl.style.display = "none";
 
-    quizIntro.innerHTML = "";
-    quizIntro.innerHTML = "<h2>" + questions[questionNumber].question + "</h2>";
-    //quizIntro.appendChild(question);
-// question.className = "main-flex";
+    var questionEl = document.querySelector("#questions");
+	questionEl.style.display = "block";
+	questionEl.textContent = questions[questionNumber].question;
+ 
+	var optionOne = document.querySelector("#option-1");
+	optionOne.style.display = "block";
+    optionOne.value = "A";
+    optionOne.textContent = questions[questionNumber].option1;
+    
+    var optionTwo = document.querySelector("#option-2");
+	optionTwo.style.display = "block";
+    optionTwo.value = "B";
+    optionTwo.textContent = questions[questionNumber].option2;
 
-    var optionButton1 = document.createElement("button");
-    optionButton1.value = "A";
-    optionButton1.textContent = questions[questionNumber].option1;
-    quizIntro.appendChild(optionButton1);
-    optionButton1.className= "option-btn";
-
-    var optionButton2 = document.createElement("button");
-    optionButton2.value = "B";
-    optionButton2.textContent = questions[questionNumber].option2;
-    quizIntro.appendChild(optionButton2);
-    optionButton2.className= "option-btn";
-
-    var optionButton3 = document.createElement("button");
-    optionButton3.value = "c";
-    optionButton3.textContent = questions[questionNumber].option3;
-    quizIntro.appendChild(optionButton3);
-    optionButton3.className= "option-btn";
-
-    //questionsAnswered++;
-
-    quizIntro.addEventListener("click", optionButtonHandler);
+    var optionThree = document.querySelector("#option-3");
+	optionThree.style.display = "block";
+    optionThree.value = "C";
+    optionThree.textContent = questions[questionNumber].option3;
+ 
+    mainContainerEl.addEventListener("click", optionButtonHandler);
 }
 
 var optionButtonHandler = function(event) {
@@ -100,13 +114,11 @@ var optionButtonHandler = function(event) {
     if (targetEl.matches(".option-btn")) {
         answer = event.target.value;
         checkAnswer();
-        questionNumber++;
-        console.log(questionNumber);
-
+        questionNumber++;       
         //next question
         if(questionNumber >= questions.length){
-            quizIntro.remove();
-            finalScoreBoardEl.style.display = "block"; 
+            mainContainerEl.remove();
+            endContainerEl.style.display = "block"; 
         }
         else{
             displayQuestion();
@@ -116,73 +128,54 @@ var optionButtonHandler = function(event) {
 
 function checkAnswer() {
     if (answer === questions[questionNumber].answer) {
-        score += 10;
-        localStorage.setItem("score", score);
-        //var result = document.createElement("h2");
-        //result.textContent = "Correct!";
-        //mainEl.appendChild(result);
-        //result.className = "result-style";
+        userScore += 10;
+        var answerResultEl = document.querySelector("#answer-result");
+		answerResultEl.style.display = "block";
+		answerResultEl.textContent = "Correct!";
    
     } else {
         timeLeft -= 10;
-        //var result = document.createElement("h2");
-        //result.textContent = "Wrong! You lost 10s from remaining time.";
-        //mainEl.appendChild(result);
-        //result.className = "result-style";
+        answerResultEl = document.querySelector("#answer-result");
+		answerResultEl.style.display = "block";
+		answerResultEl.textContent = "Wrong! You lost 5s from your remaining time";
         
     }
-};
-
-
-
-function countdown() {
-
-    var timeInterval = setInterval(function() {
-        if (timeLeft > 0) {
-            timeLeft--;
-            timerEl.textContent = "Remaining Time: " + timeLeft;
-        }
-        else {
-            quizIntro.remove();
-            finalScoreBoardEl.style.display = "block"; 
-        }
-    }, 1000);
-};
-
-
-displayScoreEl.addEventListener("click", highScore);
-
-function highScore() {
-    formContainer.innerHTML = "";
-    var scoreOne = document.createElement("h2");
-    scoreOne.textContent = "Your Score " + savedScore;
-    formContainer.appendChild(scoreOne);
-    scoreOne.className = "result-style";
-
-    var startAgain = document.createElement("button");
-    startAgain.textContent = "Retake Quiz";
-    startAgain.className = "btn";
-    formContainer.appendChild(startAgain);
-    
-
-    startAgain.addEventListener("click", function(){
-        window.location.reload();
-    });
 }
+
 
 
     
 saveScoreBtn.addEventListener("click", saveScore);
 
 function saveScore(){
-    if (username.value) {
+    if (userName.value) {
     var yourScore = document.createElement("h2");
-    yourScore.textContent = username.value + " scored " + score;
-    formContainer.appendChild(yourScore);
-    yourScore.className = "result-style";
-    
-    localStorage.setItem("Name", username.value);
+    yourScore.textContent = userName.value + " scored " + userScore;
+	yourScore.className = "score-text";
+    endContainerEl.appendChild(yourScore);
+		
+		
+	storeScore = {
+			user: userName.value,
+			score: userScore
+	};
+	allScores = JSON.parse(localStorage.getItem('scores')) || [ ];
+	allScores.push(storeScore);
+	localStorage.setItem("scores", JSON.stringify(allScores));	
+	
     } else {
         alert("Please enter your name!");
     }
 }
+
+displayScoreEl.addEventListener("click", highScore);
+
+function highScore() {
+   
+	displayScoreEl.setAttribute("href", "highscore.html");
+	
+}
+
+
+	
+

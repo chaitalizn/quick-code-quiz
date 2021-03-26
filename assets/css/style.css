@@ -13,110 +13,112 @@
        padding: 0;
    }
    
-   
-   
    body {
        font-family: Arial, Helvetica, sans-serif;
        width: 100%;
        background-color: var(--color3);
        color: var(--color5);
    }
-   
+
+    a {
+       text-decoration: none; 
+   }
+
    .header-flex {
        display: flex;
        justify-content: space-between;
        margin: 2rem 4rem;
    }
+      
    
-   
-   .header-flex-item-1, a {
-       text-decoration: none;
-       color: var(--color1);
-   }
-   
-   .header-flex-item-1, .header-flex-item-2 {
-       font-size: 2rem;
-       border: 1px solid var(--color1);
-       background-color: var(--color5);
-       color: var(--color1);
-       padding: 1rem;
-   }
-   
-   .main-flex, .question-flex {
+   .main-flex {
        background-color: var(--color4);
        border-radius: 2rem;
        margin: 6rem auto 0 auto;
-       padding: 4rem;
-       width: 40%;
-       display: flex;
-       flex-direction: column;
+       padding: 3rem;
+       width: 60%;
        align-content: center;
        
    }
-   .result-style {
-       margin: 2rem 0;
-       text-align: center;
-       color: var(--color1);
    
-   }
-   
-   .main-flex-item-1, .main-flex-item-2, .main-flex-item-3 {
+   .main-flex-item {
        margin: 1rem 2rem;
    }
    
    
    h1 {
-       font-size: 6rem;
-       padding-bottom: .5rem;
+       font-size: 7rem;
+       padding-bottom: 1.5rem;
    }
    
-   h2, .question-style {
-       font-size: 3.5rem;
+   h2 {
+       font-size: 4rem;
        font-weight: lighter;
+	   padding-bottom: 2rem;
    }
-   .main-flex-item-2 p {
-       font-size: 2rem;
-       line-height: 3rem;
+   p {
+       font-size: 3rem;
+       line-height: 3.5rem;
        font-weight: lighter;
    }
    
    .btn {
+	   color: var(--color1);
        padding: 2rem 4rem;
        font-size: 2.5rem;
        font-weight: bold;
        background-color: var(--color2);
        border: 1px solid var(--color5);
+	   border-radius: 1rem;
    
    }
    
    .option-btn {
-       font-size: 2rem;
+	   font-size: 2rem;
        padding: 1rem;
+	   font-weight: normal;
        margin: 2rem 0;
-       background-color: var(--color2);
-       border: 1px solid var(--color5);
        text-align: left;
+	   display: none;
    }
+
+	.qatext {
+		display: none;
+	}
    
    /*Form*/
    
-   #end, form {
-       width: 100%;
+.end-container, form {
        display: flex;
        flex-direction: column;
-       align-items: center;
+       align-items: center;	
    }
+
+form {
+	margin: 5rem 0;
+}
    
    input {
-       margin-bottom: 1rem;
-       padding: 1.5rem;
-       font-size: 1.8rem;
+       margin-bottom: 4rem;
+       padding: 2rem;
+       font-size: 3rem;
    }
    
    .end-container {
        display: none;
    }
 
-   #scoreTitle {
+   .score-text {
        color: var(--color4);
+	   text-align: center;
    }
+
+
+/*highscore page list style*/
+#displayScores {
+	padding-left: 2rem;
+    padding-bottom: 2rem;
+	font-size: 3.5rem;
+    line-height: 4.5rem;
+    font-weight: lighter;
+}

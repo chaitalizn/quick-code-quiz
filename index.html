@@ -12,47 +12,61 @@
     <header>
         <div class="header-flex">
             <div class="header-flex-item-1">
-                <p id="high-score">HIGH SCORES</p>
+				<a id="high-score"><p class="btn">HIGH SCORES</p></a>
             </div>
 
             <div class="header-flex-item-2">
-                <p class="time">TIME</p>
+                <p id="time" class="btn">TIME</p>
             </div>
         </div>
 
     </header>
 
     <main id="main">
-        <div class="main-flex" id="quiz-intro">
+        <div class="main-flex" id="main-container">
             
-            <div class="main-flex-item-1">
+            <div class="main-flex-item quiz-intro">
                 <h1>Quick Code Quiz</h1>
                 <h2>Test Your JavaScript Knowleage.</h2>
+				<p>Try answer following JavaScript questions in give time. Keep in mind if your answer is incorrect 10s will be deducted from your remaining time.</p>   
             </div>
-            <div class="main-flex-item-2">
-                <p>Try answer following JavaScript questions in give time. Keep in mind if your answer is incorrect 10s will be deducted from your remaining time.</p>
+			
+            <div class="main-flex-item" >
+                <button type="button" id="start-btn" class="btn">START</button>
             </div>
-            <div class="main-flex-item-3">
-                <button type="button" class="btn" id="start-btn">START</button>
+			<div class="main-flex-item">
+                <p class="qatext" id="questions">What will the question be?</p>
             </div>
+			<div class="main-flex-item">
+                <p class="btn option-btn" id="option-1"><a>option 1</a></p>
+            </div>
+			<div class="main-flex-item">
+                <p class="btn option-btn" id="option-2"><a>option 2</a></p>
+            </div>
+			<div class="main-flex-item">
+                <p class="btn option-btn" id="option-3"><a>option 3</a></p>
+            </div>
+			<div class="main-flex-item" >
+				<p class="qatext" id="answer-result">Result</p>
+			</div>
+			
             
         </div>
         
         <div class="end-container">
-            <div id="end" class="end-flex">
-                <h1 id="scoreTitle">Score Board</h1>
-                <div id = "form-container">
-                <form>
-                    <input 
-                    type="text"
-                    name="username"
-                    id="username"
-                    placeholder="username" />
-    
-                    <button type="button" class="btn" id="saveScoreBtn"> SAVE</button>
-                </form>
-                </div>
-            </div>
+            	
+                	<h1 class="score-text">Score Board</h1>
+                
+					<form>
+						<input 
+						type="text"
+						name="username"
+						id="username"
+						placeholder="username" />
+
+						<button type="button" class="btn" id="saveScoreBtn"> SAVE</button>
+					</form>
+             
         </div>
     </main>
 
