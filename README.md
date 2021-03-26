@@ -1,7 +1,7 @@
 # quick-code-quiz
 
 ## Purpose
-Timed quiz 
+Timed code quiz that deduct time from timer when user answer the question wrong. It also uses local storage to store score and user is able to see it when clicked on high Score button
 
 ## Built With
 * HTML
@@ -10,11 +10,17 @@ Timed quiz
 
 ## Features include
 
-## Screencapture of the Final Website 
-![Screencapture]()
+## Screencapture of progess anf final app screens
+![pseudo code](assets/images/pseudo-code-quick-code-quiz.png)
+![pseudo code](assets/images/Capture1.PNG)
+![pseudo code](assets/images/Capture2.PNG)
+![pseudo code](assets/images/Capture3.PNG)
+![pseudo code](assets/images/Capture4.PNG)
+
+
 
 ## Website
-(https://chaitalizn.github.io/)
+(https://chaitalizn.github.io/quick-code-quiz/)
 
 ## By
 Chaitali Patel
